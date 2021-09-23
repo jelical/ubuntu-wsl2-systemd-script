@@ -1,0 +1,15 @@
+[Unit]
+Description=xwin2
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Restart=always
+RestartSec=1
+EnvironmentFile=%h/.systemd-env
+ExecStart=/bin/bash -c "%h/.xwin/bin/XWin.exe -silent-dup-error -nolisten inet6 -hostintitle +bs -clipboard -ac -wgl -screen 0 '@2' -multiwindow -noreset :0"
+ExecStop=/mnt/c/WINDOWS/system32/taskkill.exe /F /IM XWin.exe
+WorkingDirectory=%h/bin
+
+[Install]
+WantedBy=default.target
