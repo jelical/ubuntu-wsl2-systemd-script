@@ -35,7 +35,7 @@ if (-not(Test-Path -Path lxr.zip -PathType Leaf)) {
 
 Copy-Item .\Ubuntu.appx .\$main.zip
 Expand-Archive .\$main.zip -Force
-Expand-Archive .\lxr.zip -Force
+Expand-Archive .\lxr.zip -Force -DestinationPath .
 wsl.exe --import $main .\$main .\$main\install.tar.gz
 wsl.exe -d $main NEWUSER=$user bash -c 'groupadd -g 1000 \$NEWUSER && useradd -m -r -u 1000 -g \$NEWUSER -d /home/\$NEWUSER -s /usr/bin/bash \$NEWUSER && echo \$NEWUSER:\$NEWUSER | chpasswd && echo \$NEWUSER ALL=\(ALL\) NOPASSWD:ALL >> /etc/sudoers'
 .\lxr\LxRunOffline.exe su -n $main -v 1000
