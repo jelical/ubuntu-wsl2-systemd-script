@@ -62,6 +62,7 @@ cp "$self_dir/xwin2.service" ~/.local/share/systemd/user/xwin2.service
 cp "$self_dir/.bash_aliases" ~/
 mkdir -p ~/.config/systemd/user/default.target.wants
 ln -sf ~/.local/share/systemd/user/xwin2.service ~/.config/systemd/user/default.target.wants/
+mkdir -p ~/work/similarweb
 
 sudo tee /etc/sudoers.d/systemd-namespace >/dev/null <<EOF
 Defaults        env_keep += WSLPATH
