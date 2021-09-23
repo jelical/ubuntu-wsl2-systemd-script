@@ -8,6 +8,9 @@ if [ "$LOGNAME" != "root" ] && ( [ -z "$SYSTEMD_PID" ] || [ "$SYSTEMD_PID" != "1
 IFS|LANG|LOGNAME|MACHTYPE|MAIL|NAME|OLDPWD|OPTERR|\
 OSTYPE|PATH|PIPESTATUS|POSIXLY_CORRECT|PPID|PS1|PS4|\
 SHELL|SHELLOPTS|SHLVL|SYSTEMD_PID|UID|USER|_)(=|\$)" > "$HOME/.systemd-env"
+    if [ -z "$DISPLAY" ]; then
+      echo "DISPLAY=$(awk '/nameserver/ { print $2":0" }' /etc/resolv.conf)" >> "$HOME/.systemd-env"
+    fi
     export PRE_NAMESPACE_PATH="$PATH"
     export PRE_NAMESPACE_PWD="$(pwd)"
     exec sudo /usr/sbin/enter-systemd-namespace "$BASH_EXECUTION_STRING"
