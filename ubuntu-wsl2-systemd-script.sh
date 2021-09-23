@@ -57,11 +57,19 @@ sudo cp "$self_dir/start-systemd-namespace" /usr/sbin/start-systemd-namespace
 sudo cp "$self_dir/enter-systemd-namespace" /usr/sbin/enter-systemd-namespace
 sudo chmod +x /usr/sbin/enter-systemd-namespace
 
+cp "$self_dir/.bash_aliases" ~/
+
+# install xwin user service
 mkdir -p ~/.local/share/systemd/user
 cp "$self_dir/xwin2.service" ~/.local/share/systemd/user/xwin2.service
-cp "$self_dir/.bash_aliases" ~/
 mkdir -p ~/.config/systemd/user/default.target.wants
 ln -sf ~/.local/share/systemd/user/xwin2.service ~/.config/systemd/user/default.target.wants/
+# copy xwin distribution to runtime dir
+mkdir -p ~/.xwin && cd ~/.xwin
+wget https://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/1.0/xwin.tar.gz
+tar xvf xwin.tar.gz
+
+# prepare working dir
 mkdir -p ~/work/similarweb
 
 sudo tee /etc/sudoers.d/systemd-namespace >/dev/null <<EOF
