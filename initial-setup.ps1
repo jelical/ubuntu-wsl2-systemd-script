@@ -25,8 +25,8 @@ if (-not(Test-Path -Path Ubuntu.appx -PathType Leaf)) {
 }
 if (-not(Test-Path -Path lxr.zip -PathType Leaf)) {
     try {
-        Write-Host "Downloading offline lxr from https://github.com/DDoSolitary/LxRunOffline/releases/download/v3.5.0/LxRunOffline-v3.5.0-msvc.zip."
-        Invoke-WebRequest -Uri https://github.com/DDoSolitary/LxRunOffline/releases/download/v3.5.0/LxRunOffline-v3.5.0-msvc.zip -OutFile lxr.zip -UseBasicParsing
+        Write-Host "Downloading offline lxr from https://ddosolitary-builds.sourceforge.io/LxRunOffline/LxRunOffline-v3.5.0-33-gbdc6d7d-msvc.zip."
+        Invoke-WebRequest -Uri https://ddosolitary-builds.sourceforge.io/LxRunOffline/LxRunOffline-v3.5.0-33-gbdc6d7d-msvc.zip -OutFile lxr.zip -UseBasicParsing
     }
     catch {
         throw $_.Exception.Message
