@@ -79,6 +79,9 @@ Defaults        env_keep += WSL_INTEROP
 Defaults        env_keep += WSL_DISTRO_NAME
 Defaults        env_keep += PRE_NAMESPACE_PATH
 Defaults        env_keep += PRE_NAMESPACE_PWD
+Defaults        env_keep += DISPLAY
+Defaults        env_keep += WAYLAND_DISPLAY
+Defaults        env_keep += PULSE_SERVER
 %sudo ALL=(ALL) NOPASSWD: /usr/sbin/enter-systemd-namespace
 EOF
 
