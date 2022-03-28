@@ -1,5 +1,17 @@
+alias wsls="wsl.exe --shutdown"
 alias arel=". ~/.bash_aliases"
 alias konsole="konsole > /dev/null 2>&1 &"
+loop(){
+  num=$1;
+  shift;  
+  for i in $(seq 1 10); do "$@"; done 
+}
+userctl() {
+  systemctl --user "$@"
+}
+log() {
+	 git log origin/master --first-parent --grep="BIS" --pretty='format:%h,%s,%cn,%ce,%as' --since="2021-01-01" | sed "s=Merge branch '==g" | sed "s=' into 'master'==g" | sed "s=\(.*\)\(BIS-[0-9]*\)\(.*\)=\1\2\3,https://jira.similarweb.io/browse/\2=g"
+}
 pushd () {
     command pushd "$@" > /dev/null
 }
@@ -11,6 +23,9 @@ scode(){
 }
 e(){
   echo 'y' | /snap/bin/code `realpath ${@:-.}` > /dev/null 2>&1 &
+}
+storm(){
+  phpstorm `realpath ${@:-.}` > /dev/null 2>&1 &
 }
 ride(){
   rider `realpath ${@:-.}` > /dev/null 2>&1 &
@@ -75,6 +90,12 @@ dc(){
 dnb(){
   dotnet build $@	
 }
+dtt(){
+  dotnet test $@ --no-build -c Debug  /p:CollectCoverage=true /p:CoverletOutputFormat=Cobertura \
+      --filter "TestCategory!=IntegrationTests&TestCategory!=integration&Category!=IntegrationTests&Category!=integration" \
+      --test-adapter-path:. --logger:"console;verbosity=quiet" \
+      --collect:"XPlat Code Coverage"
+}
 dnc(){
   dotnet build -p:RunNodePipeline=true $@	
 }
@@ -115,7 +136,8 @@ alias nau="nautilus"
 alias dol="dolphin"
 alias pla="kpackagetool5 --list --type Plasma/Applet -g"
 alias poc="pushd ~/work/similarweb/poc"
-alias shop="pushd ~/work/similarweb/custom-industry"
+alias shop="pushd ~/work/similarweb/shopper-platform"
+alias inv="pushd ~/work/similarweb/investors-intelligence"
 ff(){
   find . -name "$1"
 }
