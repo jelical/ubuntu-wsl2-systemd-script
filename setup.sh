@@ -1,6 +1,5 @@
 #!/bin/bash
 
-setup vital staff
 echo "Apt get vital stuff..."
 sudo apt-get update -y
 sudo apt-get upgrade -y
