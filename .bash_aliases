@@ -1,16 +1,31 @@
 alias wsls="wsl.exe --shutdown"
 alias arel=". ~/.bash_aliases"
+alias al="code ~/.bash_aliases"
 alias konsole="konsole > /dev/null 2>&1 &"
+iam(){
+    aws_account=${1:-'operational'}
+    intra aws creds --update-default-profile --mode write --update-default-profile --username vladsp --account $aws_account --requested-team 'R&D Web'
+    echo "using aws account $aws_account"
+}
+ustatus(){
+  systemctl --user status $@
+}
+ustart(){
+  systemctl --user start $@
+}
+ustop(){
+  systemctl --user stop $@
+}
 loop(){
   num=$1;
-  shift;  
-  for i in $(seq 1 10); do "$@"; done 
+  shift;
+  for i in $(seq 1 10); do "$@"; done
 }
 userctl() {
   systemctl --user "$@"
 }
 log() {
-	 git log origin/master --first-parent --grep="BIS" --pretty='format:%h,%s,%cn,%ce,%as' --since="2021-01-01" | sed "s=Merge branch '==g" | sed "s=' into 'master'==g" | sed "s=\(.*\)\(BIS-[0-9]*\)\(.*\)=\1\2\3,https://jira.similarweb.io/browse/\2=g"
+         git log origin/master --first-parent --grep="BIS" --pretty='format:%h,%s,%cn,%ce,%as' --since="2021-01-01" | sed "s=Merge branch '==g" | sed "s=' into 'master'==g" | sed "s=\(.*\)\(BIS-[0-9]*\)\(.*\)=\1\2\3,https://jira.similarweb.io/browse/\2=g"
 }
 pushd () {
     command pushd "$@" > /dev/null
@@ -40,10 +55,10 @@ idea(){
   intellij-idea-ultimate `realpath ${@:-.}` > /dev/null 2>&1 &
 }
 rbm(){
-  rubymine `realpath ${@:-.}` > /dev/null 2>&1 & 
+  rubymine `realpath ${@:-.}` > /dev/null 2>&1 &
 }
-scale(){ 
-  export GDK_SCALE=$1 
+scale(){
+  export GDK_SCALE=$1
 }
 alias cls=clear
 alias gitex="~/gitex/gitext.sh > /dev/null 2>&1"
@@ -51,16 +66,16 @@ sysctl(){
  sudo systemctl $@
 }
 aptget(){
- sudo apt-get $@ -y 
+ sudo apt-get $@ -y
 }
 svi(){
- sudo vi $@	
+ sudo vi $@
 }
 chrome(){
   google-chrome-stable $@ > /dev/null 2>&1 &
 }
 edge(){
-  microsoft-edge-beta $@ > /dev/null 2>&1 &
+  microsoft-edge-stable $@ > /dev/null 2>&1 &
 }
 alias d="export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0"
 alias s=". ~/.bashrc"
@@ -74,7 +89,7 @@ pskill(){
   ps -ef | grep $1 | grep -v grep | awk '{print $2}' | xargs -I {} kill -9 {}
 }
 sgit(){
-  ~/smartgit/bin/smartgit.sh $1	
+  ~/smartgit/bin/smartgit.sh $1
 }
 alias sgit="~/smartgit/bin/smartgit.sh"
 alias ports="sudo lsof -i -P -n | grep LISTEN"
@@ -85,10 +100,10 @@ dr(){
   docker run -it $@
 }
 dc(){
-  docker-compose $@	
+  docker-compose $@
 }
 dnb(){
-  dotnet build $@	
+  dotnet build $@
 }
 dtt(){
   dotnet test $@ --no-build -c Debug  /p:CollectCoverage=true /p:CoverletOutputFormat=Cobertura \
@@ -97,7 +112,7 @@ dtt(){
       --collect:"XPlat Code Coverage"
 }
 dnc(){
-  dotnet build -p:RunNodePipeline=true $@	
+  dotnet build -p:RunNodePipeline=true $@
 }
 dcopy(){
   mkdir -p $2
@@ -119,8 +134,8 @@ gray(){
 
 plas(){
   p=$1
-  shift  
-  plasmawindowed org.kde.plasma.$p $@	
+  shift
+  plasmawindowed org.kde.plasma.$p $@
 }
 
 alias pd="popd"
@@ -148,6 +163,6 @@ pstage(){
 }
 
 upgrade(){
-  aptget update 
+  aptget update
   aptget upgrade
 }
