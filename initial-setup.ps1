@@ -16,7 +16,7 @@ if ([string]::IsNullOrWhiteSpace($user))
 if (-not(Test-Path -Path root.tar.gz -PathType Leaf)) {
     try {
         Write-Host "Downloading ubuntu 20.04.4 basic distribution ."
-        Invoke-WebRequest -Uri http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/1.0/root.tar.gz -OutFile root.tar.gz -UseBasicParsing
+        Invoke-WebRequest -Uri http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/2.0/root.tar.gz -OutFile root.tar.gz -UseBasicParsing
     }
     catch {
         throw $_.Exception.Message
@@ -25,7 +25,7 @@ if (-not(Test-Path -Path root.tar.gz -PathType Leaf)) {
 if (-not(Test-Path -Path LxRunOffline.exe -PathType Leaf)) {
     try {
         Write-Host "Downloading offline lxr"
-        Invoke-WebRequest -Uri  http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/1.0/LxRunOffline.exe -OutFile LxRunOffline.exe -UseBasicParsing
+        Invoke-WebRequest -Uri  http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/2.0/LxRunOffline.exe -OutFile LxRunOffline.exe -UseBasicParsing
     }
     catch {
         throw $_.Exception.Message
