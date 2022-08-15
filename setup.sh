@@ -37,6 +37,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 source ~/.bashrc
 nvm install 16.13.1
 nvm alias default 16.13.1
+npm install -g yarn
 
 echo "edge and chrome"
 sudo bash -c 'curl https://packages.microsoft.com/keys/microsoft.asc | bash -c "gpg --dearmor > microsoft.gpg"'
