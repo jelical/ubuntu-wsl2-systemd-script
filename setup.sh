@@ -51,7 +51,7 @@ echo "xwin"
 echo "export DISPLAY="$(awk '/nameserver/ { print $2 }' < /etc/resolv.conf)":0" >> ~/.bashrc 
 rm -rf ~/.xwin
 mkdir -p ~/.xwin
-curl -L http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/2.0/xwin.tar.gz | tar -C ~/.xwin -zxvf -
+curl -L http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/2.0/xwin.tar.gz | tar -C ~/.xwin -zxf -
 mkdir -p ~/.local/share/systemd/user
 rm -f ~/.local/share/systemd/user/xwin2.service
 curl -L https://raw.githubusercontent.com/jelical/ubuntu-wsl2-systemd-script/master/xwin2.service > ~/.local/share/systemd/user/xwin2.service
