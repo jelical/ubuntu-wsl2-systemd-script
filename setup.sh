@@ -4,7 +4,7 @@ echo "Apt get vital stuff..."
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo hwclock -s
-sudo apt-get install -yqq wget curl vim snapd fuse keychain slim daemonize dbus-user-session fontconfig ca-certificates gnupg lsb-release ntpdate
+sudo apt-get install -yqq wget curl vim keychain slim fontconfig ca-certificates gnupg lsb-release ntpdate
 sudo ntpdate -s time.nist.gov
 
 echo "Sudoers..."
