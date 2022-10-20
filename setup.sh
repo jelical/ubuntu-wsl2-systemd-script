@@ -49,7 +49,7 @@ sudo rm google-chrome-stable_current_amd64.deb
 
 echo "xwin"
 echo "export DISPLAY="$(awk '/nameserver/ { print $2 }' < /etc/resolv.conf)":0" >> ~/.bashrc 
-echo "systemctl --user import-environment WSL_INTEROP" >> ~/.bashrc 
+#echo "systemctl --user import-environment WSL_INTEROP" >> ~/.bashrc 
 rm -rf ~/.xwin
 mkdir -p ~/.xwin
 curl -L http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/2.0/xwin.tar.gz | tar -C ~/.xwin -zxf -
