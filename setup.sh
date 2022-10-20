@@ -48,7 +48,7 @@ sudo rm google-chrome-stable_current_amd64.deb
 
 
 echo "xwin"
-echo "export DISPLAY="$(awk '/nameserver/ { print $2 }' < /etc/resolv.conf)":0" >> ~/.bashrc 
+echo "export DISPLAY=\$(awk '/nameserver/ { print \$2 }' < /etc/resolv.conf):0" >> ~/.bashrc 
 #echo "systemctl --user import-environment WSL_INTEROP" >> ~/.bashrc 
 rm -rf ~/.xwin
 mkdir -p ~/.xwin
