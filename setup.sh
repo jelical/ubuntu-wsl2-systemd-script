@@ -60,7 +60,7 @@ sudo loginctl enable-linger $USER
 systemctl --user daemon-reload
 systemctl --user enable xwin2
 systemctl --user restart xwin2
-systemctl --user status xwin2
+#systemctl --user status xwin2
 
 echo "aliases"
 curl -L https://raw.githubusercontent.com/jelical/ubuntu-wsl2-systemd-script/master/.bash_aliases > ~/.bash_aliases
