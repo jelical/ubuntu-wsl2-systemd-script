@@ -16,8 +16,8 @@ sudo bash -c "echo $USER ALL=\(ALL\) NOPASSWD:ALL >> /etc/sudoers"
 # sudo apt-get update 
 # sudo apt-get install -yqq docker-ce docker-ce-cli containerd.io
 
-echo "adding user to docker group..."
-sudo usermod -aG docker $USER
+# echo "adding user to docker group..."
+# sudo usermod -aG docker $USER
 
 echo "patching docker daemon setup"
 sudo tee -a /etc/systemd/system/docker.service.d/override.conf > /dev/null <<EOT
