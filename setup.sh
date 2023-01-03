@@ -10,11 +10,11 @@ sudo ntpdate -s time.nist.gov
 echo "Sudoers..."
 sudo bash -c "echo $USER ALL=\(ALL\) NOPASSWD:ALL >> /etc/sudoers"
 
-echo "Docker..."
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null'
-sudo apt-get update 
-sudo apt-get install -yqq docker-ce docker-ce-cli containerd.io
+# echo "Docker..."
+# sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null'
+# sudo apt-get update 
+# sudo apt-get install -yqq docker-ce docker-ce-cli containerd.io
 
 echo "adding user to docker group..."
 sudo usermod -aG docker $USER
