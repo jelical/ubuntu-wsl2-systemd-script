@@ -19,12 +19,12 @@ sudo bash -c "echo $USER ALL=\(ALL\) NOPASSWD:ALL >> /etc/sudoers"
 # echo "adding user to docker group..."
 # sudo usermod -aG docker $USER
 
-echo "patching docker daemon setup"
-sudo tee -a /etc/systemd/system/docker.service.d/override.conf > /dev/null <<EOT
-[Service]
-ExecStart=
-ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --containerd=/run/containerd/containerd.sock
-EOT
+# echo "patching docker daemon setup"
+# sudo tee -a /etc/systemd/system/docker.service.d/override.conf > /dev/null <<EOT
+# [Service]
+# ExecStart=
+# ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --containerd=/run/containerd/containerd.sock
+# EOT
 
 echo "setup dotnet"
 sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0
@@ -64,6 +64,14 @@ systemctl --user restart xwin2
 
 echo "aliases"
 curl -L https://raw.githubusercontent.com/jelical/ubuntu-wsl2-systemd-script/master/.bash_aliases > ~/.bash_aliases
+
+sudo tee -a /etc/fonts/local.conf > /dev/null <<EOT
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+    <dir>/mnt/c/Windows/Fonts</dir>
+</fontconfig>
+EOT
 
 echo "snaps"
 sudo snap install rider --classic
