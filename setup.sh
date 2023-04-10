@@ -39,7 +39,7 @@ npm install -g yarn
 echo "edge and chrome"
 sudo bash -c 'curl https://packages.microsoft.com/keys/microsoft.asc | bash -c "gpg --dearmor > microsoft.gpg"'
 sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo bash -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+sudo bash -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"  | tee /etc/apt/sources.list.d/microsoft-edge-dev.list > /dev/null'
 sudo rm microsoft.gpg
 sudo apt-get update -yy && sudo apt-get install microsoft-edge-stable -yy
 sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
