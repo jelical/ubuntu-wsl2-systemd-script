@@ -10,21 +10,21 @@ sudo ntpdate -s time.nist.gov
 echo "Sudoers..."
 sudo bash -c "echo $USER ALL=\(ALL\) NOPASSWD:ALL >> /etc/sudoers"
 
-# echo "Docker..."
-# sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-# sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null'
-# sudo apt-get update 
-# sudo apt-get install -yqq docker-ce docker-ce-cli containerd.io
+echo "Docker..."
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null'
+sudo apt-get update 
+sudo apt-get install -yqq docker-ce docker-ce-cli containerd.io
 
-# echo "adding user to docker group..."
-# sudo usermod -aG docker $USER
+echo "adding user to docker group..."
+sudo usermod -aG docker $USER
 
-# echo "patching docker daemon setup"
-# sudo tee -a /etc/systemd/system/docker.service.d/override.conf > /dev/null <<EOT
-# [Service]
-# ExecStart=
-# ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --containerd=/run/containerd/containerd.sock
-# EOT
+echo "patching docker daemon setup"
+sudo tee -a /etc/systemd/system/docker.service.d/override.conf > /dev/null <<EOT
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --containerd=/run/containerd/containerd.sock
+EOT
 
 echo "setup dotnet"
 sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0
@@ -72,11 +72,6 @@ sudo tee -a /etc/fonts/local.conf > /dev/null <<EOT
     <dir>/mnt/c/Windows/Fonts</dir>
 </fontconfig>
 EOT
-
-echo "snaps"
-sudo snap install rider --classic
-sudo snap install webstorm --classic
-sudo snap install datagrip --classic
 
 echo "done"
 
