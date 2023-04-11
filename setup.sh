@@ -4,7 +4,7 @@ echo "Apt get vital stuff..."
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo hwclock -s
-sudo apt-get install -yqq wget curl vim keychain slim fontconfig ca-certificates gnupg lsb-release ntpdate
+sudo apt-get install -yqq wget curl vim keychain slim fontconfig ca-certificates gnupg lsb-release ntpdate git thunar xfe fuse
 sudo ntpdate -s time.nist.gov
 
 echo "Sudoers..."
@@ -55,23 +55,30 @@ mkdir -p ~/.xwin
 curl -L http://github.com/jelical/ubuntu-wsl2-systemd-script/releases/download/2.0/xwin.tar.gz | tar -C ~/.xwin -zxf -
 mkdir -p ~/.local/share/systemd/user
 rm -f ~/.local/share/systemd/user/xwin2.service
-curl -L https://raw.githubusercontent.com/jelical/ubuntu-wsl2-systemd-script/master/xwin2.service > ~/.local/share/systemd/user/xwin2.service
+curl -L https://raw.githubusercontent.com/jelical/ubuntu-wsl2-systemd-script/master/xwin2.service | tee ~/.local/share/systemd/user/xwin2.service
 sudo loginctl enable-linger $USER
 systemctl --user daemon-reload
 systemctl --user enable xwin2
 systemctl --user restart xwin2
-#systemctl --user status xwin2
 
 echo "aliases"
-curl -L https://raw.githubusercontent.com/jelical/ubuntu-wsl2-systemd-script/master/.bash_aliases > ~/.bash_aliases
+curl -L https://raw.githubusercontent.com/jelical/ubuntu-wsl2-systemd-script/master/.bash_aliases | tee ~/.bash_aliases
 
-sudo tee -a /etc/fonts/local.conf > /dev/null <<EOT
+sudo tee /etc/fonts/local.conf > /dev/null <<EOT
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
     <dir>/mnt/c/Windows/Fonts</dir>
 </fontconfig>
 EOT
+
+sudo fc-cache -f -v
+curl -sL https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.27.3.14493.tar.gz -o /tmp/jt.tar.gz
+cd /tmp
+tar -xvf jt.tar.gz 
+mkdir -p ~/.local/bin
+mv  jetbrains-toolbox-1.27.3.14493/jetbrains-toolbox ~/.local/bin
+echo 'export PATH=/home/$USER/.local/bin:$PATH' >> ~/.bashrc
 
 echo "done"
 
